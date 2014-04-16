@@ -57,6 +57,12 @@ class TestLanguage < Racc::Parser
     token = case @state
     when nil
       case
+      when (text = @ss.scan(/u/))
+         action { puts "Single u." }
+
+      when (text = @ss.scan(/uu/))
+         action { puts "Double u." }
+
       else
         text = @ss.string[@ss.pos .. -1]
         raise  ScanError, "can not match: '" + text + "'"
@@ -68,6 +74,14 @@ class TestLanguage < Racc::Parser
     token
   end  # def _next_token
 
+  def tokenize(code)
+    scan_setup(code)
+    tokens = []
+    while token = next_token
+      tokens << token
+    end
+    tokens
+  end
 end # class
 
 
