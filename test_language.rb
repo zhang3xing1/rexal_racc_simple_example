@@ -2,5 +2,5 @@ require './lexer.rb'
 
 class TestLanguageTester
 	@evaluator = TestLanguage.new
-	@evaluator.tokenize("u")
+	@evaluator.tokenize("y")
 end

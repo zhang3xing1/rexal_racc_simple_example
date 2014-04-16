@@ -1,7 +1,10 @@
 class TestLanguage
 rule
-  u     { puts "Single u." }
+  \w    {puts "regular ok" }
   uu    { puts "Double u." }
+  u     { puts "Single u." }
+  uuu   { puts "Triple u." }
+  .     { puts "Could not match." }
 
 inner
   def tokenize(code)
