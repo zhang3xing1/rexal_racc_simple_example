@@ -6,21 +6,27 @@ class TestLanguageTester
       @evaluator = TestLanguage.new
     end
     
-    it 'tests for a digit' do
-      result = @evaluator.tokenize("12")
+    it "tests for a digit" do
+      result = @evaluator.tokenize("2")
       result[0][0].should == :DIGIT
-      result[0][1].should == 12
+      result[0][1].should == 2
     end
-    
-    it 'tests for a word' do
-      result = @evaluator.tokenize("testing")
-      result[0][0].should == :WORD
-      result[0][1].should == "testing"
+     
+    it "tests for a symbol" do
+      result = @evaluator.tokenize("+")
+      result[0][0].should == :ADD
+      result[0][1].should == "+"
     end
 
-    it 'tests for spaces' do
-      result = @evaluator.tokenize("   ")
-      result[0].should == nil
+
+    it "tests for a calculation" do
+      result = @evaluator.tokenize("2+2")
+      result[0][0].should == :DIGIT
+      result[0][1].should == 2
+      result[1][0].should == :ADD
+      result[1][1].should == "+"
+      result[2][0].should == :DIGIT
+      result[2][1].should == 2
     end
 
   end

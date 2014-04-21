@@ -10,3 +10,12 @@ desc "Generate Lexer"
 task :lexer do
   `rex test_language.rex -o lexer.rb`
 end
+
+desc "Generate Parser"
+task :parser do
+  `racc test_language.y -o parser.rb`
+end
+
+
+desc "Generate Lexer and Parser"
+task :generate => [:lexer, :parser]

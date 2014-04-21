@@ -63,8 +63,17 @@ class TestLanguage < Racc::Parser
       when (text = @ss.scan(/\d+/))
          action { [:DIGIT, text.to_i] }
 
-      when (text = @ss.scan(/\w+/))
-         action { [:WORD, text] }
+      when (text = @ss.scan(/\+/))
+         action { [:ADD, text] }
+
+      when (text = @ss.scan(/\-/))
+         action { [:SUBTRACT, text] }
+
+      when (text = @ss.scan(/\*/))
+         action { [:MULTIPLY, text] }
+
+      when (text = @ss.scan(/\//))
+         action { [:DIVIDE, text] }
 
       else
         text = @ss.string[@ss.pos .. -1]
@@ -86,5 +95,3 @@ class TestLanguage < Racc::Parser
     tokens
   end
 end # class
-
-
