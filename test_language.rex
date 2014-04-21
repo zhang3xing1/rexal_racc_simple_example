@@ -1,9 +1,11 @@
 class TestLanguage
+macro
+  BLANK   [\ \t]+
+  
 rule
-  uuu { return "Triple u." }
-  uu  { return "Double u." }
-  u   { return "Single u." }
-  .   { return "Could not match." }
+  {BLANK} # no action
+  \d+   { [:DIGIT, text.to_i] }
+  \w+   { [:WORD, text] }
 
 inner
   def tokenize(code)

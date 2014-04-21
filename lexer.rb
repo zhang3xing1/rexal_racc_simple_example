@@ -57,17 +57,14 @@ class TestLanguage < Racc::Parser
     token = case @state
     when nil
       case
-      when (text = @ss.scan(/uuu/))
-         action { return "Triple u." }
+      when (text = @ss.scan(/[ \t]+/))
+        ;
 
-      when (text = @ss.scan(/uu/))
-         action { return "Double u." }
+      when (text = @ss.scan(/\d+/))
+         action { [:DIGIT, text.to_i] }
 
-      when (text = @ss.scan(/u/))
-         action { return "Single u." }
-
-      when (text = @ss.scan(/./))
-         action { return "Could not match." }
+      when (text = @ss.scan(/\w+/))
+         action { [:WORD, text] }
 
       else
         text = @ss.string[@ss.pos .. -1]

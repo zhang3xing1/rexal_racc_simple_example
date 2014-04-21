@@ -6,25 +6,22 @@ class TestLanguageTester
       @evaluator = TestLanguage.new
     end
     
-    it 'tests for a single u' do
-      result = @evaluator.tokenize("u")
-      result[0].should == "Single u."
+    it 'tests for a digit' do
+      result = @evaluator.tokenize("12")
+      result[0][0].should == :DIGIT
+      result[0][1].should == 12
+    end
+    
+    it 'tests for a word' do
+      result = @evaluator.tokenize("testing")
+      result[0][0].should == :WORD
+      result[0][1].should == "testing"
     end
 
-    it 'tests for a double u' do
-      result = @evaluator.tokenize("uu")
-      result[0].should == "Double u."
+    it 'tests for spaces' do
+      result = @evaluator.tokenize("   ")
+      result[0].should == nil
     end
-    
-    it 'tests for a triple u' do
-      result = @evaluator.tokenize("uuu")
-      result[0].should == "Triple u."
-    end
-    
-    it 'tests for a no match' do
-      result = @evaluator.tokenize("y")
-      result[0].should == "Could not match."
-    end
-    
+
   end
 end
